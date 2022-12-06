@@ -26,6 +26,15 @@ WIN_POINTS = 6
 DRAW_POINTS = 3
 
 
+def result_game_play(me_result, win_result, draw_result):
+    if me_result == win_result:
+        return WIN_POINTS + hashmap_value[me_result]
+    elif me_result == draw_result:
+        return DRAW_POINTS + hashmap_value[me_result]
+    else:
+        return hashmap_value[me_result]
+
+
 def part_one(file):
     game_round = file.readline()
     total_result = 0
@@ -34,29 +43,16 @@ def part_one(file):
         me_result = game_round[2]
 
         if opponent_result == RockPaperScissorsOpponent.ROCK.value:
-            if me_result == RockPaperScissorsMe.PAPER.value:
-                total_result = total_result + WIN_POINTS + hashmap_value[me_result]
-            elif me_result == RockPaperScissorsMe.ROCK.value:
-                total_result = total_result + DRAW_POINTS + hashmap_value[me_result]
-            else:
-                total_result = total_result + hashmap_value[me_result]
+            total_result += result_game_play(me_result, win_result=RockPaperScissorsMe.PAPER.value,
+                                                        draw_result=RockPaperScissorsMe.ROCK.value)
 
         elif opponent_result == RockPaperScissorsOpponent.PAPER.value:
-            if me_result == RockPaperScissorsMe.SCISSORS.value:
-                total_result = total_result + WIN_POINTS + hashmap_value[me_result]
-            elif me_result == RockPaperScissorsMe.PAPER.value:
-                total_result = total_result + DRAW_POINTS + hashmap_value[me_result]
-            else:
-                total_result = total_result + hashmap_value[me_result]
+            total_result += result_game_play(me_result, win_result=RockPaperScissorsMe.SCISSORS.value,
+                                             draw_result=RockPaperScissorsMe.PAPER.value)
 
         elif opponent_result == RockPaperScissorsOpponent.SCISSORS.value:
-            if me_result == RockPaperScissorsMe.ROCK.value:
-                total_result = total_result + WIN_POINTS + hashmap_value[me_result]
-            elif me_result == RockPaperScissorsMe.SCISSORS.value:
-                total_result = total_result + DRAW_POINTS + hashmap_value[me_result]
-            else:
-                total_result = total_result + hashmap_value[me_result]
-
+            total_result += result_game_play(me_result, win_result=RockPaperScissorsMe.ROCK.value,
+                                             draw_result=RockPaperScissorsMe.SCISSORS.value)
         game_round = file.readline()
     return total_result
 
