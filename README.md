@@ -1,3 +1,2 @@
-# adventOfCode22
-Advent of Code'22
-NOT CLEAN CODE & NOT EFICENT CODE. 
+# Advent of Code'22
+:warning: **NOT CLEAN CODE & NOT EFICENT CODE.**
